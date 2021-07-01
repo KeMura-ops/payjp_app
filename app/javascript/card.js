@@ -1,7 +1,7 @@
 const pay = () => {
   Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY); // 環境変数を読み込む
-  const submit = document.getElementById("button");
-  submit.addEventListener("click", (e) => { // イベント発火
+    const submit = document.getElementById("button");
+    submit.addEventListener("click", (e) => { // イベント発火
     e.preventDefault();
 
     // カード情報の取得先
@@ -22,6 +22,16 @@ const pay = () => {
         const tokenObj = `<input value=${token} name='card_token' type="hidden">`; // paramsの中にトークンを含める
         renderDom.insertAdjacentHTML("beforeend", tokenObj); // フォームの最後に要素を追加
       }
+
+      // カード情報の削除
+      document.getElementById("number").removeAttribute("name");
+      document.getElementById("cvc").removeAttribute("name");
+      document.getElementById("exp_month").removeAttribute("name");
+      document.getElementById("exp_year").removeAttribute("name");
+
+      document.getElementById("charge-form").submit();
     });
   });
 };
+
+window.addEventListener("load", pay);
