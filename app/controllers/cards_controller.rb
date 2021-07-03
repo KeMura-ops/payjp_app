@@ -8,5 +8,9 @@ class CardsController < ApplicationController
       description: 'test', # テストカードであることを説明
       card: params[:card_token] # 登録しようとしているカード情報
     )
+    card = Card.new( # 顧客トークンとログインしているユーザーを紐付けるインスタンスを生成
+      customer_token: customer.id, # 顧客トークン
+      user_id: current_user.id # ログインしているユーザー
+    )
   end
 end
